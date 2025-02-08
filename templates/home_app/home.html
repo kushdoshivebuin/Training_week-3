@@ -1,1 +1,42 @@
+{% extends "base.html" %}
 
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Discover and Manage Your Favorite Blogs</h2>
+            <p>Join a community of bloggers and content enthusiasts. Access, create, and organize blogs effortlessly. The platform you've been waiting for.</p>
+            <div class="cta-buttons">
+                <a href="/signup" class="cta-btn">Sign Up</a>
+                <a href="/login" class="cta-btn">Log In</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Information Section -->
+    <section class="info">
+        <h3>How WordHive Helps You</h3>
+        <p>With WordHive, blogging has never been easier. Whether you're an aspiring writer or a seasoned blogger, our platform simplifies content creation, management, and discovery.</p>
+        <ul>
+            <li><strong>Quick Sign-Up:</strong> Create your account in just a few clicks and get started.</li>
+            <li><strong>Explore & Discover:</strong> Browse blogs across various topics like Tech, Health, and Lifestyle.</li>
+            <li><strong>Easy Blog Management:</strong> Write, edit, and organize your blogs with a simple and intuitive interface.</li>
+            <li><strong>Community Interaction:</strong> Engage with fellow bloggers, share your thoughts, and grow your network.</li>
+        </ul>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h3>What Our Users Say</h3>
+        <div class="testimonial">
+            <p>"WordHive has helped me connect with other bloggers and stay organized. I love how simple the platform is!"</p>
+            <span>- Jane Doe</span>
+        </div>
+        <div class="testimonial">
+            <p>"A great platform for discovering new blogs and managing my own content with ease!"</p>
+            <span>- John Smith</span>
+        </div>
+    </section>
+{% endblock %}

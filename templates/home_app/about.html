@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}About Us {% endblock %}
+
+{% block body %}
+<style>
+    /* Section styles */
+    section {
+        padding: 60px 20px;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.85); /* Light transparent background */
+        margin-top: 100px; /* Space from the fixed navbar */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        width: 80%; /* Limits the section width */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    section + section {
+        margin-top: 60px;
+    }
+
+    /* Heading styles */
+    section h2, section h3 {
+        font-size: 2.5em;
+        font-weight: 700;
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+
+    section p {
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        color: #333;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    section ul {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 20px;
+        text-align: left;
+        display: inline-block;
+    }
+
+    section li {
+        font-size: 1.1em;
+        margin-bottom: 15px;
+    }
+
+    section strong {
+        color: #007bff;
+    }
+
+    /* Team Section */
+    .team-members {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+    
+    .team-member {
+        max-width: 250px;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.85);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        margin-bottom: 20px;
+    }
+    
+    .team-member:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .team-member img {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+        margin-bottom: 15px;
+    }
+    
+    .team-member h4 {
+        font-size: 1.2em;
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+    
+    .team-member p {
+        font-size: 1em;
+        color: #777;
+    }
+
+    /* Call to action button styling */
+    .cta-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 15px 30px;
+        font-size: 1.1em;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        margin-top: 20px;
+    }
+
+    .cta-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+    <!-- About Us Section -->
+    <section class="about-us">
+        <h2>About WordHive</h2>
+        <p>At WordHive, we believe that everyone has a voice, and everyone should have a platform to share their ideas. Our mission is to make blogging accessible, enjoyable, and engaging for users of all skill levels. Whether you’re a seasoned writer or just starting, WordHive is the place to discover, create, and grow.</p>
+    </section>
+
+    <!-- Our Mission Section -->
+    <section class="our-mission">
+        <h3>Our Mission</h3>
+        <p>WordHive’s mission is to build a vibrant community where bloggers can connect, collaborate, and inspire each other. We aim to empower individuals to express themselves through the power of words while simplifying the process of blog creation and management. Our platform is designed to make content discovery seamless and writing an enjoyable experience.</p>
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="our-values">
+        <h3>Our Values</h3>
+        <ul>
+            <li><strong>Creativity:</strong> We believe in the power of creative expression and strive to offer tools that help our users bring their ideas to life.</li>
+            <li><strong>Community:</strong> Building a supportive and engaged community is at the heart of everything we do. We connect bloggers, creators, and content enthusiasts.</li>
+            <li><strong>Innovation:</strong> We constantly evolve our platform to meet the changing needs of our users and to stay at the forefront of the blogging world.</li>
+            <li><strong>Accessibility:</strong> WordHive is built for everyone, regardless of experience or background. We ensure our platform is intuitive and easy to use.</li>
+        </ul>
+    </section>
+
+    <!-- Our Team Section -->
+    <section class="our-team">
+        <h3>Meet the Team</h3>
+        <p>Behind WordHive is a passionate team dedicated to improving the blogging experience. We are a diverse group of individuals united by our love for content creation and our belief in the power of sharing ideas. Here’s a quick look at the people behind the scenes:</p>
+        <div class="team-members">
+            <div class="team-member">
+                <img src="https://img.freepik.com/free-photo/experienced-businessman-standing-office-room-indian-content-office-employee-eyeglasses-smiling-posing-with-folded-hands-business-management-corporation-concept_74855-11681.jpg?semt=ais_hybrid" alt="Team Member 1">
+                <h4>Jane Doe</h4>
+                <p>Co-Founder & CEO</p>
+                <p>Jane is a passionate writer and tech enthusiast who believes in empowering bloggers to reach their full potential.</p>
+            </div>
+            <div class="team-member">
+                <img src="https://img.freepik.com/free-photo/positive-middle-aged-business-leader-window_1262-5388.jpg?semt=ais_hybrid" alt="Team Member 2">
+                <h4>John Smith</h4>
+                <p>Co-Founder & CTO</p>
+                <p>John’s vision for an easy-to-use platform drives WordHive's technological innovations, ensuring an intuitive experience for every user.</p>
+            </div>
+            <div class="team-member">
+                <img src="https://img.freepik.com/free-photo/medium-shot-woman-working-interior-design-project_23-2150346497.jpg?semt=ais_hybrid" alt="Team Member 3">
+                <h4>Emily White</h4>
+                <p>Product Designer</p>
+                <p>Emily is responsible for the beautiful, user-friendly design that makes WordHive enjoyable to use.</p>
+            </div>
+        </div>
+    </section>    
+
+    <!-- Contact Us Section -->
+    <section class="contact-us">
+        <h3>Contact Us</h3>
+        <p>If you have any questions, suggestions, or would like to get in touch with us, don’t hesitate to reach out!</p>
+        <a href="/contact" class="cta-btn">Contact Us</a>
+    </section>
+    <br><br>
+{% endblock body %}
