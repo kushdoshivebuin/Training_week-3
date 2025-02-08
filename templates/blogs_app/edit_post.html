@@ -1,0 +1,131 @@
+{% extends 'blogs_app/home.html' %}
+
+{% block title %} Edit Blogpost {% endblock title %}
+
+{% block body %}
+<style>
+    .edit-post-container {
+        background-color: #ffffff;
+        border-radius: 15px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        transition: all 0.3s ease;
+    }
+
+    .edit-post-container:hover {
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        transform: translateY(-5px);
+    }
+
+    .edit-post-title {
+        font-size: 2.2rem;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    .form-group label {
+        font-size: 1.1rem;
+        color: #444;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        font-size: 1rem;
+        color: #555;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: 1px solid #dcdcdc;
+        width: 100%;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+        transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #ff9800;
+        box-shadow: 0 0 8px rgba(255, 152, 0, 0.5);
+        background-color: #ffffff;
+    }
+
+    .form-control::placeholder {
+        color: #888;
+    }
+
+    .save-btn {
+        background-color: #ff9800;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .save-btn:hover {
+        background-color: #e68900;
+        transform: scale(1.05);
+    }
+
+    .save-btn:active {
+        background-color: #cc7a00;
+    }
+
+    .container {
+        padding: 40px 20px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .edit-post-container {
+            padding: 30px;
+        }
+
+        .edit-post-title {
+            font-size: 1.8rem;
+        }
+
+        .form-control {
+            font-size: 0.95rem;
+        }
+
+        .save-btn {
+            font-size: 1rem;
+            padding: 10px 20px;
+        }
+    }
+</style>
+
+<div class="container my-5">
+    <div class="edit-post-container p-4 shadow-lg rounded-lg bg-white">
+        <h2 class="edit-post-title mb-4">Edit Post: {{ post.title }}</h2>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Title -->
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" class="form-control" id="title" value="{{ post.title }}" required>
+            </div>
+
+            <!-- Content -->
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea name="content" class="form-control" id="content" rows="5" required>{{ post.content }}</textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-warning">Save Changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

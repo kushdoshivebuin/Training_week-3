@@ -1,0 +1,149 @@
+{% extends 'blogs_app/home.html' %}
+
+{% block title %}Search Results{% endblock title %}
+
+{% block body %}
+<style>
+    /* General Layout */
+    .container {
+        padding-top: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Heading Style */
+    h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    /* No Results Message */
+    .no-results p {
+        font-size: 1.1rem;
+        color: #777;
+    }
+
+    .no-results ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+
+    /* Search Results Styling */
+    .search-result-card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .search-result-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Content Section */
+    .search-result-card .card-content {
+        padding: 20px;
+        flex-grow: 1;
+    }
+
+    .search-result-card h3 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .search-result-card .text-muted {
+        font-size: 0.9rem;
+        color: #777;
+        margin-bottom: 15px;
+    }
+
+    .search-result-card .card-text {
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+
+    /* "Continue Reading" Button */
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 30px;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    /* Responsive Layout for search results */
+    .row.no-gutters {
+        margin: 0;
+    }
+
+    @media (max-width: 768px) {
+        .search-result-card {
+            margin-bottom: 15px;
+        }
+
+        .search-result-card h3 {
+            font-size: 1.6rem;
+        }
+
+        .search-result-card .card-text {
+            font-size: 0.95rem;
+        }
+    }
+</style>
+
+<div class="container my-3">
+    <h2>Search results for: <b>{{ query }}</b></h2>
+
+    {% if allPosts|length < 1 %}
+        <div class="no-results">
+            <p>No search results found for your query.</p>
+            <p>Your search query: <b>{{ query }}</b> did not match any documents. <br>
+            Suggestions:
+            <ul>
+                <li>Make sure that all words are spelled correctly.</li>
+                <li>Try more general keywords.</li>
+                <li>Try fewer keywords.</li>
+                <li>Try different keywords.</li>
+            </ul>
+            </p>
+        </div>
+    {% else %}
+        <div class="search-results">
+            {% for post in allPosts %}
+            <div class="search-result-card">
+                <div class="card-content">
+                    <strong class="d-inline-block mb-2 text-primary">Article by {{ post.author }}</strong>
+                    <h3 class="mb-0">{{ post.title }}</h3>
+                    <div class="text-muted">{{ post.datetime }}</div>
+                    <p class="card-text mb-auto">{{ post.content|truncatechars:100|safe }}</p>
+                    <div class="my-2">
+                        <a href="/blogs/{{ post.slug }}" role="button" class="btn btn-primary">Continue reading</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

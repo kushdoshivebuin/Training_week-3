@@ -1,1 +1,185 @@
+{% extends "base.html" %}
 
+{% block title %} Blog Home {% endblock title %}
+
+{% block nav %}
+<form method="GET" action="{% url 'search' %}" class="d-flex justify-content-center">
+    <div class="input-group shadow-lg rounded-pill overflow-hidden" style="max-width: 500px;">
+        <!-- Input field with a search icon -->
+        <input type="search" name="query" class="form-control border-0 rounded-pill px-4" placeholder="Search..." aria-label="Search" aria-describedby="search-addon" style="height: 30px;" />
+        
+        <!-- Search button with increased height -->
+        <button type="submit" class="btn btn-primary rounded-pill px-4 d-flex align-items-center justify-content-center" data-mdb-ripple-color="light" style="height: 30px; padding: 0 12px;">
+            <i class="fas fa-search" style="font-size: 16px;"></i>
+        </button>
+    </div>
+</form>
+
+<!-- Make sure to include FontAwesome for the icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<a class="logout-icon" class = "{% if request.path == '/logout' %}current{% endif %}" href="/logout">
+    <span>Logout</span>
+</a>
+
+{% endblock nav %}
+
+{% block body %}
+<style>
+    /* General Layout */
+    .container {
+        padding-top: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-bottom: 30px;
+    }
+
+    /* Post Section Styling */
+    .post-section {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+        max-height: 500px; /* Ensure the container does not stretch too much */
+        overflow: hidden;
+    }
+    
+
+    .post-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .post-thumbnail {
+        width: 100%;
+        height: 200px;
+        background-color: #f0f0f0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-content {
+        padding: 20px;
+    }
+
+    /* Post Title and Text */
+    .post-section h3 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .post-section .text-muted {
+        font-size: 0.9rem;
+        color: #777;
+        margin-bottom: 15px;
+    }
+
+    .post-section .card-text {
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        overflow: hidden; /* Prevent overflow */
+        text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Clamp to 3 lines (or adjust as necessary) */
+        -webkit-box-orient: vertical;
+    }
+    
+
+    /* "Continue Reading" Button */
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 30px;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    /* Floating Action Button (FAB) */
+    .fab-create {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        font-size: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        text-align: center;
+    }
+    
+    .fab-create:hover {
+        background-color: #0056b3;
+    }
+
+    /* Responsive Layout */
+    .post-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    .post-container .post-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Mobile Responsive Layout */
+    @media (max-width: 768px) {
+        .post-container {
+            grid-template-columns: 1fr;
+        }
+
+        .fab-create {
+            bottom: 30px;
+            right: 15px;
+        }
+    }
+</style>
+
+<!-- Blog Posts Section -->
+<div class="container my-5">
+    <div class="post-container">
+        {% for post in allPosts %}
+        <div class="post-section">
+            <div class="post-content">
+                <strong class="d-inline-block mb-2 text-primary">Article by {{ post.author }}</strong>
+                <h3><a href="/blogs/{{ post.slug }}">{{ post.title }}</a></h3>
+                <div class="text-muted">{{ post.timeStamp }}</div>
+                <p class="card-text">{{ post.content|truncatewords:30 }}</p>
+                <a href="/blogs/{{ post.slug }}" class="btn btn-primary">Continue reading</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Floating Action Button to Create Post -->
+<a href="/blogs/create_blog" class="fab-create">+</a>
+
+{% endblock %}
