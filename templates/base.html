@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordHive | {% block title %}{% endblock %}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            /* Full viewport height */
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        nav img {
+            height: 50px;
+            width: auto;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        nav a:active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        nav a.current {
+            background-color: green;
+            color: white;
+        }
+
+        .hero {
+            background: rgba(0, 123, 255, 0.8);
+            color: white;
+            padding: 100px 50px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.25em;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Custom styles for alert messages */
+        .alert-dismissible {
+            position: relative;
+            padding: 15px 30px 15px 15px;
+            /* Adjust padding for better spacing */
+            margin-bottom: 20px;
+            /* Space between alerts */
+            border-radius: 5px;
+            /* Rounded corners */
+        }
+
+        /* Style for error messages */
+        .alert-danger {
+            background-color:  #f44336;
+            /* Light red background */
+            color: black;
+            /* Dark red text */
+            border-color: #f5c6cb;
+            /* Light red border */
+        }
+
+        .alert-danger .btn-close {
+            background-color:  #f44336;
+            /* Light red close button */
+            color:black;
+            /* Dark red close button */
+        }
+
+        /* Style for success messages */
+        .alert-success {
+            background-color:#4CAF50;
+            /* Light green background */
+            color: black;
+            /* Dark green text */
+            border-color: #c3e6cb;
+            /* Light green border */
+        }
+
+        .alert-success .btn-close {
+            background-color: #4CAF50;
+            /* Light green close button */
+            color: black;
+            /* Dark green close button */
+        }
+
+        /* Hover effect for alert close button */
+        .alert .btn-close:hover {
+            opacity: 0.8;
+        }
+
+
+        .cta-buttons .cta-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.1em;
+            border-radius: 5px;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: #218838;
+        }
+
+        .info,
+        .blog-previews,
+        .testimonials {
+            padding: 60px 20px;
+            text-align: center;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .info h3,
+        .testimonials h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .info ul {
+            list-style-type: none;
+            margin-top: 20px;
+            padding: 0;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .info li {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .testimonial {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .testimonial p {
+            font-size: 1.2em;
+            font-style: italic;
+            color: #555;
+        }
+
+        .testimonial span {
+            display: block;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        footer {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 1em;
+            margin-top: auto;
+            /* This ensures the footer is pushed to the bottom */
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div>
+            <img src="https://th.bing.com/th/id/OIP.3GobN-WMWfKuzZovM7KKkAAAAA?w=285&h=120&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                alt="WordHive Logo">
+        </div>
+        <div class="nav-links">
+            <a href="/" class="{% if request.path == '/' %}current{% endif %}">Home</a>
+            <a href="/about" class="{% if request.path == '/about' %}current{% endif %}">About Us</a>
+            <a href="/contact" class="{% if request.path == '/contact' %}current{% endif %}">Contact Us</a>
+        </div>
+ 
+        {% block nav %}
+        <div class="login-signup">
+            <a href="/login" class = "{% if request.path == '/login' %}current{% endif %}">Login</a>
+            <a href="/signup" class = "{% if request.path == '/signup' %}current{% endif %}">Signup</a>
+        </div>
+        {% endblock nav %}
+    </nav>
+
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+
+    <div class="main-content">
+        {% block body %}{% endblock %}
+    </div>
+</body>
+
+<footer>
+    <p>&copy; 2025 WordHive. All rights reserved.</p>
+</footer>
+
+</html>
